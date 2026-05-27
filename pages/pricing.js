@@ -12,7 +12,7 @@ const PLANS = [
     features: [
       'Domain health scan (SPF / DKIM / DMARC)',
       'Blacklist monitoring — 80+ RBLs',
-      'Inbox placement test — 5 seed addresses',
+      'Inbox placement test — 50 seed addresses',
       'Monthly deliverability report',
       'Email support',
     ],
@@ -29,8 +29,8 @@ const PLANS = [
     desc:     'For DTC brands sending 50K+ emails per month.',
     features: [
       'Everything in Starter',
-      'Full seed list warm-up (50-address network)',
-      'Inbox placement test — 50 seed addresses',
+      'Full seed list warm-up (250-address network)',
+      'Inbox placement test — 250 seed addresses',
       'Weekly deliverability reporting',
       'DMARC aggregate report analysis',
       'Dedicated Slack channel',
@@ -49,7 +49,7 @@ const PLANS = [
     desc:     'For high-volume senders who need managed deliverability.',
     features: [
       'Everything in Growth',
-      'Full seed list warm-up (200-address network)',
+      'Full seed list warm-up (500-address network)',
       'Dedicated IP setup & warm-up strategy',
       'Custom suppression list management',
       'Weekly 30-min strategy call',
