@@ -228,7 +228,7 @@ export const pricingPage = (env) => layout({
         ['Do I need to change my ESP?','No. InboxSmarts works alongside any ESP — Klaviyo, ActiveCampaign, Omnisend, Mailchimp. We fix your domain infrastructure and warm your reputation. Your ESP stays the same.'],
         ['How long before I see results?','Most clients see measurable inbox placement improvements within 7–14 days. Authentication fixes take effect immediately; seed list warm-up signal compounds over 30–90 days.'],
         ['What if I\'m already blacklisted?','We handle blacklist removal as part of onboarding for Growth and Pro plans. Starter customers receive a remediation checklist they can follow.'],
-        ['Is there a setup fee?','No setup fees. Your first invoice is your monthly plan rate. Onboarding is included.'],
+        ['Is there a setup fee?','Yes, there is a setup fee.'],
         ['Can I upgrade or downgrade?','Yes — anytime. Upgrades take effect immediately. Downgrades take effect at your next billing cycle.'],
         ['What ESP integrations do you support?','Currently Klaviyo, ActiveCampaign, Omnisend, Mailchimp, and Mailgun. Additional platforms available on Pro.'],
       ].map(([q,a]) => `

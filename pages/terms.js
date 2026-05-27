@@ -2,7 +2,7 @@ import { layout } from '../layout.js';
 
 // TODO: Review with a lawyer before launch.
 const EFFECTIVE_DATE = 'April 15, 2025';
-const COMPANY        = 'Sales Ignition LLC';
+const COMPANY        = 'SJW Ventures, LLC';
 const STATE          = 'South Carolina';
 const EMAIL          = 'hello@inboxsmarts.com';
 const SITE           = 'inboxsmarts.com';
@@ -184,13 +184,6 @@ export const termsPage = (env) => layout({
           Questions about these Terms? Contact us at:<br>
           <a href="mailto:${EMAIL}">${EMAIL}</a><br>
           ${COMPANY}, ${STATE}, USA
-        </p>
-
-        <p style="margin-top:48px;padding:16px;background:rgba(255,184,48,0.06);border-left:2px solid var(--warn);font-size:13px;color:var(--muted);">
-          <strong style="color:var(--warn);font-family:var(--mono);font-size:11px;letter-spacing:1px;">// TODO — LEGAL REVIEW REQUIRED</strong><br>
-          This is a template. Have a qualified attorney review these terms before launch.
-          Sections on liability, warranties, and governing law carry significant legal weight.
-          Remove this notice before going live.
         </p>
       </div>
     </div>

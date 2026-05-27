@@ -44,19 +44,11 @@ export const contactPage = (env) => layout({
           </div>
 
           <div class="contact-method">
-            <div class="section-label" style="margin-bottom:8px;">// emergency deliverability support</div>
-            <!-- TODO: Replace with actual phone or emergency contact -->
-            <div style="font-family:var(--mono);font-size:16px;color:var(--text);">+1 (949) 408-0710</div>
-            <div style="font-size:13px;color:var(--muted);margin-top:6px;">For active inbox crises — blacklisted or sudden inbox collapse. Pro plan customers only.</div>
-          </div>
-
-          <div class="contact-method">
             <div class="section-label" style="margin-bottom:8px;">// book a call</div>
             <div style="font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:12px;">
               Prefer to talk it through? Book a free 20-minute deliverability consultation.
             </div>
-            <!-- TODO: Replace with Calendly link -->
-            <a href="https://calendly.com/gotaxquotes/ac-tax-appointment" target="_blank" rel="noopener" class="btn-outline" style="font-size:13px;padding:10px 20px;">
+            <a href="https://calendar.app.google/ERH2VHjwXyJLeJYS6" target="_blank" rel="noopener" class="btn-outline" style="font-size:13px;padding:10px 20px;">
               Book a 20-min Call →
             </a>
           </div>

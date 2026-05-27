@@ -201,7 +201,7 @@ export const footer = () => `
     <a href="/terms">Terms of Service</a>
   </div>
   <span style="font-family:var(--mono);font-size:11px;color:var(--muted)">
-    © 2025 InboxSmarts · A Sales Ignition Product
+    © 2025 InboxSmarts · A SJW Ventures Product
   </span>
 </footer>
 `;

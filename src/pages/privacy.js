@@ -4,7 +4,7 @@ import { layout } from '../layout.js';
 // Customize: company name, state of incorporation, data practices, Klaviyo/n8n data flows.
 
 const EFFECTIVE_DATE = 'April 15, 2025';
-const COMPANY        = 'Sales Ignition LLC';
+const COMPANY        = 'SJW Ventures, LLC';
 const STATE          = 'South Carolina';
 const EMAIL          = 'privacy@inboxsmarts.com';
 const SITE           = 'inboxsmarts.com';
