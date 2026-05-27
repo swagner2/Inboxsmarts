@@ -208,7 +208,7 @@ export const pricingPage = (env) => layout({
         ${[
           ['Domain health scan',       '✓','✓','✓'],
           ['Blacklist monitoring',      '✓','✓','✓'],
-          ['Inbox placement tests',     '5 seeds','50 seeds','200 seeds'],
+          ['Inbox placement tests',     '50 seeds','250 seeds','500 seeds'],
           ['Seed list warm-up',         '—','✓','✓'],
           ['DMARC report analysis',     '—','✓','✓'],
           ['Dedicated IP setup',        '—','—','✓'],
