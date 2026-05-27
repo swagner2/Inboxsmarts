@@ -17,7 +17,7 @@ const PLANS = [
       'Email support',
     ],
     cta:      'Get Started',
-    ctaUrl:   'https://saleignite.spiffy.co/inboxsmarts-starter', // TODO
+    ctaUrl:   'https://buy.stripe.com/bJe4gA9Lo98rbhU3P83Je1d', // TODO
     highlight: false,
   },
   {
