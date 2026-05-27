@@ -37,7 +37,7 @@ const PLANS = [
       'Priority email + Zoom support',
     ],
     cta:      'Get Started',
-    ctaUrl:   'https://saleignite.spiffy.co/inboxsmarts-growth', // TODO
+    ctaUrl:   'https://buy.stripe.com/28E4gA9Lo1FZfya3P83Je1b', // TODO
     highlight: true,
   },
   {
@@ -57,7 +57,7 @@ const PLANS = [
       'White-glove onboarding',
     ],
     cta:      'Get Started',
-    ctaUrl:   'https://saleignite.spiffy.co/inboxsmarts-pro', // TODO
+    ctaUrl:   'https://buy.stripe.com/14AfZi9Lo3O7adQ5Xg3Je1c', // TODO
     highlight: false,
   },
 ];
