@@ -1,5 +1,6 @@
 import { layout } from '../layout.js';
 
+// TODO: Wire STRIPE_URL to your actual Stripe checkout links
 const PLANS = [
   {
     id:       'starter',
@@ -16,7 +17,7 @@ const PLANS = [
       'Email support',
     ],
     cta:      'Get Started',
-    ctaUrl:   'https://buy.stripe.com/bJe4gA9Lo98rbhU3P83Je1d',
+    ctaUrl:   'https://buy.stripe.com/bJe4gA9Lo98rbhU3P83Je1d', // TODO
     highlight: false,
   },
   {
@@ -36,7 +37,7 @@ const PLANS = [
       'Priority email + Zoom support',
     ],
     cta:      'Get Started',
-    ctaUrl:   'https://buy.stripe.com/28E4gA9Lo1FZfya3P83Je1b',
+    ctaUrl:   'https://buy.stripe.com/28E4gA9Lo1FZfya3P83Je1b', // TODO
     highlight: true,
   },
   {
@@ -56,7 +57,7 @@ const PLANS = [
       'White-glove onboarding',
     ],
     cta:      'Get Started',
-    ctaUrl:   'https://buy.stripe.com/14AfZi9Lo3O7adQ5Xg3Je1c',
+    ctaUrl:   'https://buy.stripe.com/14AfZi9Lo3O7adQ5Xg3Je1c', // TODO
     highlight: false,
   },
 ];
