@@ -1,6 +1,5 @@
 import { layout } from '../layout.js';
 
-// TODO: Wire SPIFFY_URL to your actual Spiffy checkout links
 const PLANS = [
   {
     id:       'starter',
@@ -17,7 +16,7 @@ const PLANS = [
       'Email support',
     ],
     cta:      'Get Started',
-    ctaUrl:   'https://buy.stripe.com/bJe4gA9Lo98rbhU3P83Je1d', // TODO
+    ctaUrl:   'https://buy.stripe.com/bJe4gA9Lo98rbhU3P83Je1d',
     highlight: false,
   },
   {
@@ -37,7 +36,7 @@ const PLANS = [
       'Priority email + Zoom support',
     ],
     cta:      'Get Started',
-    ctaUrl:   'https://buy.stripe.com/28E4gA9Lo1FZfya3P83Je1b', // TODO
+    ctaUrl:   'https://buy.stripe.com/28E4gA9Lo1FZfya3P83Je1b',
     highlight: true,
   },
   {
@@ -57,7 +56,7 @@ const PLANS = [
       'White-glove onboarding',
     ],
     cta:      'Get Started',
-    ctaUrl:   'https://buy.stripe.com/14AfZi9Lo3O7adQ5Xg3Je1c', // TODO
+    ctaUrl:   'https://buy.stripe.com/14AfZi9Lo3O7adQ5Xg3Je1c',
     highlight: false,
   },
 ];
