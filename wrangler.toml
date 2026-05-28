@@ -5,6 +5,8 @@ compatibility_flags = ["nodejs_compat"]
 
 [vars]
 SITE_URL = "https://inboxsmarts.com"
+INTAKE_EMAIL_TO = "hello@inboxsmarts.com"
+INTAKE_EMAIL_FROM = "InboxSmarts <onboarding@inboxsmarts.com>"
 
 # Uncomment when deploying to custom domain
 # [[routes]]

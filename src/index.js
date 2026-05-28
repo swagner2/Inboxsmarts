@@ -2,16 +2,19 @@ import { homePage }       from './pages/home.js';
 import { pricingPage }    from './pages/pricing.js';
 import { signupPage }     from './pages/signup.js';
 import { thankYouPage }   from './pages/thank-you.js';
+import { checkoutReturnPage } from './pages/checkout-return.js';
 import { howItWorksPage } from './pages/how-it-works.js';
 import { contactPage }    from './pages/contact.js';
 import { privacyPage }    from './pages/privacy.js';
 import { termsPage }      from './pages/terms.js';
+import { handlePostPurchaseIntake } from '../lib/postPurchaseIntake.js';
 
 const ROUTES = {
   '/':              homePage,
   '/pricing':       pricingPage,
   '/signup':        signupPage,
   '/thank-you':     thankYouPage,
+  '/checkout-return': checkoutReturnPage,
   '/how-it-works':  howItWorksPage,
   '/contact':       contactPage,
   '/privacy':       privacyPage,
@@ -50,6 +53,10 @@ export default {
   async fetch(request, env, ctx) {
     const url    = new URL(request.url);
     const path   = url.pathname.replace(/\/$/, '') || '/';
+
+    if (path === '/api/post-purchase-intake') {
+      return handlePostPurchaseIntake(request, env);
+    }
 
     // Trailing slash redirect
     if (url.pathname !== '/' && url.pathname.endsWith('/')) {
