@@ -1,0 +1,64 @@
+
+=========================================================
+TEMPLATE: Upwork Klaviyo Cover Letter — Steven Wagner
+GOAL: Get a reply from the prospect
+TARGET LENGTH: 800-1,100 characters (sweet spot)
+HARD RULES:
+  - Hook must land in first ~220 chars (mobile preview)
+  - Max 2 links, both at the bottom
+  - No: "I'm the perfect fit", "ASAP", "guaranteed", "leverage", "delve"
+  - No calendar links in first message (ToS risk)
+=========================================================
+{{OPENER}}
+  -- PICK ONE --
+  [A] Warm (default for friendly, casual job posts):
+      "Hello, I hope your day is going well."
+  [B] Result-led (use for results-focused / agency / DTC brand posts):
+      "Took Little Hunter from $850/mo to $220K/mo in Klaviyo in 4 months."
+  [C] Question-first (use when job post is vague or you need to disqualify):
+      "Quick question before I scope this — {{specific_question}}?"
+{{RELEVANCE_LINE}}
+  -- 1 sentence proving you read the post --
+  Pattern: "Sounds like you're {{paraphrase their stated situation in their words}}."
+  Example: "Sounds like you're sitting on a healthy list but flow revenue isn't pulling its weight yet."
+  If post is too vague to mirror, delete this line.
+I've done exactly this before. I helped Little Hunter when they were doing $850/month from Klaviyo (example emails linked below).
+To get them to $220K/month in four months, I audited their flows and found the gaps. Built pre-sale flows and offers first. Then worked on post-sale flows to retain customers. After 45-60 days we had enough data to segment their leads/subscribers/buyers and send targeted campaigns to each group.
+To build the 22 flows and 48+ emails, I have a system that handles copy, design, offers, tracking, and performance.
+I'm Steven — a Top Rated Klaviyo Expert on Upwork with a 100% Job Success Score, and a Klaviyo Partner.
+About me:
+- 11 years using Klaviyo — certified and partner
+- 33+ clients
+- Write and build all flows and campaigns in Klaviyo myself
+- No account manager to deal with
+- East Coast USA based
+- Use Basecamp for your project — so you have a real-time view into the work and schedule
+- Weekly video calls to review progress, share insights, and get your feedback
+{{OPTIONAL_FIT_BULLETS}}
+  -- 1-2 extra bullets ONLY if the post mentions something specific Steven matches --
+  Examples:
+  - "Shopify + Recharge experience — comfortable with subscription flow logic"
+  - "Built welcome flows for supplement brands navigating health-claim restrictions"
+  - "Klaviyo + Postscript SMS coordination, handled in one calendar"
+  Delete entirely if nothing specific to add.
+A few quick questions:
+{{CLARIFYING_QUESTIONS}}
+  -- 2-3 questions pulled directly from gaps in the job post --
+  CHOOSE FROM:
+  - Timeline: "Job post mentions {{their_timeline}} — is there a hard deadline or target launch?"
+  - Scope: "Are there specific {{flows / emails / campaigns}} you already have in mind?"
+  - Platform: "Are you on Klaviyo Basic or Pro?"
+  - Stack: "What does your stack look like — Shopify, Recharge, anything else I should know about?"
+  - List health: "Roughly what's your list size and current engaged % (90-day openers)?"
+  - Tool preference: "I build Klaviyo emails in Figma + HTML — does that work for you?"
+  - Revenue baseline: "What's email contributing today vs. where you'd like it to be?"
+  - Current flows: "Which flows do you have live right now? (welcome, abandoned cart, browse, post-purchase…)"
+  RULE: Pick questions the prospect would actually want to answer — not questions that test them.
+I can do a quick review of your Klaviyo setup — no charge or obligation.
+To Your Success,
+Steven
+Email Examples: https://www.figma.com/design/71fyBZZpBgXMQCUYMgespQ/Email-Examples
+Campaign walkthrough: https://www.loom.com/share/dcbb3e6feefc4688b658131985c1724a
+  -- LINK ORDER RULE --
+  Put Loom first if the prospect's pain is "we don't see results" (proof-driven)
+  Put Figma first if the prospect's pain is "we need better-looking emails" (craft-driven)
