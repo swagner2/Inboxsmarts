@@ -1,109 +1,182 @@
-import { layout } from '../layout.js';
-
-export const homePage = (env) => layout({
-  title: 'Email Deliverability & Inbox Placement',
-  path: '/',
-  head: `
+export const homePage = (env) => `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InboxSmarts — Land in the Inbox</title>
+  <meta name="description" content="Amplify your email sender signals. Better inbox placement. More revenue." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    .hero { padding: 160px 0 80px; position: relative; overflow: hidden; }
-    .hero-title {
-      font-family: var(--display); font-size: clamp(56px, 9vw, 112px);
-      font-weight: 900; line-height: 0.92; letter-spacing: -1px;
-      text-transform: uppercase; margin-bottom: 32px;
+    :root {
+      --bg:#ffffff; --surface:#f4f4f4; --surface2:#efeeee; --border:#e6e6e6;
+      --ink:#1e1e1e; --ink-soft:#383838; --muted:#919191;
+      --green:#20cc78; --green-dark:#04bf62; --green-tint:rgba(32,204,120,0.1);
+      --yellow:#f8bb1e; --yellow-dark:#e1ac00; --dark:#161616;
+      --accent:#04bf62; --accent2:#20cc78; --warn:#e1ac00; --danger:#e24b4a; --text:#1e1e1e;
+      --mono:'IBM Plex Mono',monospace; --display:'Barlow Condensed',sans-serif; --body:'Barlow',sans-serif;
     }
-    .scanline {
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0.5; animation: scanline 5s linear infinite; pointer-events: none;
-    }
-    .scanner-wrap { display: flex; max-width: 640px; margin-bottom: 24px; }
-    .scanner-input {
-      flex: 1; background: var(--surface2); border: 1px solid var(--border);
-      border-right: none; color: var(--text); font-family: var(--mono);
-      font-size: 15px; padding: 16px 20px; outline: none;
-      transition: border-color 0.2s;
-    }
-    .scanner-input:focus { border-color: var(--accent); }
-    .result-row {
-      display: flex; align-items: center; gap: 12px;
-      background: var(--surface); border: 1px solid var(--border);
-      padding: 14px 18px; margin-bottom: 6px;
-      animation: fadeUp 0.3s ease both;
-    }
-    .status-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-    .dot-pass { background: #7ec8f5; box-shadow: 0 0 8px #7ec8f5; }
-    .dot-fail { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
-    .dot-warn { background: var(--warn);   box-shadow: 0 0 8px var(--warn);   }
-    .spinner {
-      width: 14px; height: 14px; border: 2px solid var(--border);
-      border-top-color: var(--accent); border-radius: 50%;
-      animation: spin 0.7s linear infinite; flex-shrink: 0;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
-    .score-wrap {
-      background: var(--surface); border: 1px solid var(--border);
-      padding: 24px 28px; display: flex; align-items: center; gap: 24px;
-      margin-top: 12px; animation: fadeUp 0.5s ease both;
-    }
-    /* ROI */
-    .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-    .roi-card { background: var(--surface); border: 1px solid var(--border); padding: 28px; position: relative; overflow: hidden; }
-    .roi-card::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; }
-    .roi-poor::before  { background: var(--danger); }
-    .roi-great::before { background: var(--accent); }
-    .roi-value { font-family: var(--mono); font-size: clamp(28px,4vw,46px); font-weight: 600; line-height: 1; }
-    .roi-lift {
-      background: rgba(0,229,160,0.06); border: 1px solid rgba(0,229,160,0.22);
-      padding: 28px 32px; display: flex; align-items: center;
-      justify-content: space-between; flex-wrap: wrap; gap: 20px;
-    }
-    .providers { display: flex; gap: 40px; flex-wrap: wrap; align-items: center; justify-content: center; padding: 44px 0; border-bottom: 1px solid var(--border); }
-    .provider { display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--muted); opacity: 0.5; transition: opacity 0.2s, color 0.2s; }
-    .provider:hover { opacity: 1; color: var(--text); }
-    .provider-logo { height: 48px; width: auto; }
-    .provider-name { font-family: var(--mono); font-size: 11px; letter-spacing: 1px; }
-    input[type=range] {
-      -webkit-appearance:none; width:100%; height:4px;
-      background:var(--border); outline:none; border-radius:2px;
-    }
-    input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance:none; width:18px; height:18px; border-radius:50%;
-      background:var(--accent); cursor:pointer; box-shadow:0 0 8px rgba(0,229,160,.5);
-    }
-    @media(max-width:768px){ .roi-grid{grid-template-columns:1fr;} .scanner-wrap{flex-direction:column;} }
-  </style>`,
-  body: `
-  <!-- HERO -->
-  <section class="hero grid-bg">
-    <div class="scanline"></div>
-    <div class="container fade-up">
-      <div class="section-label">// signal intelligence for email senders</div>
-      <h1 class="hero-title">
-        HOW MANY<br>
-        EMAILS ARE<br>
-        YOU SENDING<br>
-        <span class="accent-text">THIS YEAR?</span>
-      </h1>
-      <p style="font-weight:300;font-size:clamp(16px,2vw,20px);color:rgba(232,237,245,0.6);max-width:520px;line-height:1.65;margin-bottom:48px;">
-        Most senders lose <span style="color:var(--warn);font-weight:500">half their revenue</span> to spam folders and poor reputation — without ever knowing it. InboxSmarts amplifies your sending signals so Gmail, Outlook, and Yahoo route you to the inbox, every time.
-      </p>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+    a{color:var(--green-dark);text-decoration:none;}
+    a:hover{text-decoration:underline;}
 
-      <!-- DOMAIN SCANNER -->
-      <div class="section-label">// free domain health check</div>
-      <div class="scanner-wrap">
-        <input id="domainInput" class="scanner-input" placeholder="yourdomain.com" type="text" />
-        <button class="btn-primary" id="scanBtn" onclick="runScan()" style="padding:16px 28px;font-size:14px;">
-          Scan Domain →
-        </button>
-      </div>
-      <div id="scanResults"></div>
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .logo{font-family:var(--mono);font-size:15px;font-weight:600;letter-spacing:1px;color:var(--ink);}
+    .logo span{color:var(--green-dark);}
+    .nav-links{display:flex;gap:32px;align-items:center;}
+    .nav-links a{font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);transition:color .2s;}
+    .nav-links a:hover{color:var(--ink);}
+    .nav-cta{background:var(--yellow);border:1px solid var(--yellow);color:var(--ink);font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;cursor:pointer;transition:all .2s;display:inline-block;}
+    .nav-cta:hover{background:var(--yellow-dark);border-color:var(--yellow-dark);text-decoration:none;}
+
+    .container{max-width:1100px;margin:0 auto;padding:0 40px;}
+    .section{padding:90px 0;}
+    .btn-primary{background:var(--yellow);color:var(--ink);border:none;font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:2px;text-transform:uppercase;padding:18px 42px;cursor:pointer;transition:all .2s;display:inline-block;}
+    .btn-primary:hover{background:var(--yellow-dark);transform:translateY(-1px);text-decoration:none;}
+
+    /* HERO */
+    .hero{position:relative;text-align:center;padding:170px 0 90px;overflow:hidden;background:var(--bg);}
+    .badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--green-dark);background:var(--green-tint);border:1px solid var(--green);border-radius:999px;padding:8px 18px;margin-bottom:28px;}
+    .hero h1{font-family:var(--display);font-size:clamp(44px,6.5vw,86px);font-weight:900;line-height:0.95;text-transform:uppercase;letter-spacing:-1px;max-width:18ch;margin:0 auto 24px;color:var(--ink);}
+    .hero h1 .hl{color:var(--green);}
+    .hero-sub{font-size:clamp(17px,2vw,21px);color:var(--ink-soft);max-width:60ch;margin:0 auto 36px;line-height:1.6;}
+    .hero-cta-row{display:flex;flex-direction:column;align-items:center;gap:16px;}
+    .social-proof{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;color:var(--muted);}
+    .avatars{display:flex;}
+    .avatars span{width:30px;height:30px;border-radius:50%;border:2px solid var(--bg);background:var(--green-tint);margin-left:-10px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--green-dark);}
+    .avatars span:first-child{margin-left:0;}
+
+    /* PROVIDERS STRIP */
+    .providers{display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start;justify-content:center;padding:44px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+    .providers-label{font-family:var(--mono);font-size:22px;letter-spacing:2px;color:var(--muted);align-self:center;}
+    .provider{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--muted);opacity:.65;transition:opacity .2s,color .2s;}
+    .provider:hover{opacity:1;color:var(--ink);}
+    .provider-logo{height:48px;width:auto;}
+    .provider-name{font-family:var(--mono);font-size:11px;letter-spacing:1px;}
+
+    /* SECTION HEADERS */
+    .section-label{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green-dark);margin-bottom:14px;text-align:center;}
+    .section-title{font-family:var(--display);font-size:clamp(34px,4.5vw,58px);font-weight:900;text-transform:uppercase;line-height:1;text-align:center;margin-bottom:18px;color:var(--ink);}
+    .section-intro{text-align:center;color:var(--muted);max-width:62ch;margin:0 auto 56px;font-size:18px;line-height:1.6;}
+
+    /* HOW IT WORKS */
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .step{background:var(--surface);border:1px solid var(--border);padding:34px 30px;position:relative;overflow:hidden;}
+    .step::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--green);}
+    .step-num{font-family:var(--mono);font-size:13px;color:var(--green-dark);letter-spacing:2px;margin-bottom:18px;}
+    .step-icon{font-size:30px;margin-bottom:16px;}
+    .step h3{font-family:var(--display);font-size:26px;font-weight:800;text-transform:uppercase;margin-bottom:12px;line-height:1.05;color:var(--ink);}
+    .step p{color:var(--muted);font-size:15px;line-height:1.65;}
+
+    /* WHY (dark band, GrowthTools-style) */
+    .why{background:var(--dark);color:#fff;}
+    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+    .why .section-label{text-align:left;color:var(--green);}
+    .why h2{font-family:var(--display);font-size:clamp(32px,4vw,52px);font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:22px;color:#fff;}
+    .why h2 .hl{color:var(--green);}
+    .why p{color:rgba(255,255,255,0.72);font-size:17px;line-height:1.75;margin-bottom:18px;}
+    .why .pullquote{font-family:var(--display);font-size:24px;font-weight:700;color:#fff;border-left:3px solid var(--green);padding-left:20px;margin:26px 0;line-height:1.2;}
+    .stat-stack{display:grid;gap:16px;}
+    .stat{background:#222;border:1px solid #333;padding:26px 28px;}
+    .stat .num{font-family:var(--mono);font-size:42px;font-weight:600;color:var(--green);line-height:1;}
+    .stat .lbl{color:rgba(255,255,255,0.6);font-size:14px;margin-top:8px;}
+
+    /* FINAL CTA */
+    .final-cta{text-align:center;background:var(--bg);}
+    .final-cta h2{font-family:var(--display);font-size:clamp(36px,5vw,68px);font-weight:900;text-transform:uppercase;line-height:0.98;max-width:20ch;margin:0 auto 22px;color:var(--ink);}
+    .final-cta p{color:var(--muted);font-size:18px;max-width:54ch;margin:0 auto 34px;line-height:1.6;}
+
+    /* FOOTER */
+    footer{padding:36px 40px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+    .footer-links{display:flex;gap:24px;flex-wrap:wrap;}
+    .footer-links a{font-family:var(--mono);font-size:11px;color:var(--muted);}
+    .footer-links a:hover{color:var(--ink);}
+    .footer-fine{font-family:var(--mono);font-size:11px;color:var(--muted);}
+
+    /* SCANNER */
+    #scan .section-label{font-size:22px;}
+    #scan .section-title{color:#fff;}
+    #scan .section-intro{color:rgba(255,255,255,0.6);}
+    .scanner-wrap{display:flex;max-width:560px;margin:0 auto 24px;}
+    .scanner-input{flex:1;background:var(--bg);border:1px solid var(--border);border-right:none;color:var(--ink);font-family:var(--mono);font-size:15px;padding:16px 20px;outline:none;transition:border-color .2s;}
+    .scanner-input:focus{border-color:var(--green);}
+    .scan-results{max-width:560px;margin:0 auto;}
+    .result-row{display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--border);padding:14px 18px;margin-bottom:6px;animation:fadeUp .3s ease both;}
+    .status-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+    .dot-pass{background:var(--green);}
+    .dot-fail{background:var(--danger);}
+    .dot-warn{background:var(--yellow-dark);}
+    .spinner{width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+    .score-wrap{background:var(--bg);border:1px solid var(--border);padding:24px 28px;display:flex;align-items:center;gap:24px;margin:12px auto 0;max-width:560px;animation:fadeUp .5s ease both;}
+
+    /* ROI */
+    .card{background:var(--surface);border:1px solid var(--border);padding:32px;}
+    .roi-wrap{max-width:620px;margin:0 auto;}
+    .roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .roi-card{background:var(--surface);border:1px solid var(--border);padding:28px;position:relative;overflow:hidden;}
+    .roi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+    .roi-poor::before{background:var(--danger);}
+    .roi-great::before{background:var(--green);}
+    .roi-value{font-family:var(--mono);font-size:clamp(28px,4vw,46px);font-weight:600;line-height:1;}
+    .roi-lift{background:var(--green-tint);border:1px solid var(--green);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-top:16px;}
+    input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:var(--border);outline:none;border-radius:2px;}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--green);cursor:pointer;}
+    #roi{background:var(--green);}
+    #roi .section-label{color:#06351f;}
+    #roi .section-title{color:#06351f;}
+    #roi .section-intro{color:rgba(0,0,0,0.62);}
+    #roi .card,#roi .roi-card{background:#fff;}
+    #roi .roi-lift{background:#fff;border-color:rgba(0,0,0,0.08);}
+
+    @media (max-width:860px){
+      .steps{grid-template-columns:1fr;}
+      .why-grid{grid-template-columns:1fr;gap:32px;}
+      .roi-grid{grid-template-columns:1fr;}
+      .scanner-wrap{flex-direction:column;}
+      .scanner-input{border-right:1px solid var(--border);}
+      .nav-links{display:none;}
+      .container{padding:0 22px;}
+      nav{padding:14px 20px;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="logo">inbox<span>smarts</span>.com</a>
+    <div class="nav-links">
+      <a href="#how">How It Works</a>
+      <a href="#why">Why It Works</a>
+      <a href="/pricing">Pricing</a>
     </div>
-  </section>
+    <a href="/signup" class="nav-cta">Get Started</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="container">
+      <div class="badge">★ Free Inbox Reputation Scan ★</div>
+      <h1>Get Your Emails Into the <span class="hl">Inbox</span> — Not the Spam Folder</h1>
+      <p class="hero-sub">Half your revenue is lost to spam folders you never see. InboxSmarts amplifies your sending signals so Gmail, Outlook &amp; Yahoo route you straight to the primary inbox — every send.</p>
+      <div class="hero-cta-row">
+        <a href="/signup" class="btn-primary">I want better deliverability</a>
+        <div class="social-proof">
+          <div class="avatars"><span>SK</span><span>MR</span><span>JD</span><span>AL</span></div>
+          <span>Join 3,142+ senders reaching the inbox</span>
+        </div>
+      </div>
+    </div>
+  </header>
 
   <!-- PROVIDERS -->
   <div class="providers container">
-    <span style="font-family:var(--mono);font-size:22px;letter-spacing:2px;color:var(--muted);">IMPROVE YOUR INBOX REPUTATION ON:</span>
+    <span class="providers-label">IMPROVE YOUR INBOX REPUTATION ON:</span>
     <div class="provider">
       <svg class="provider-logo" viewBox="0 0 24 24" role="img" aria-label="Gmail" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
       <span class="provider-name">Gmail</span>
@@ -118,150 +191,173 @@ export const homePage = (env) => layout({
     </div>
   </div>
 
-  <!-- ROI CALCULATOR -->
-  <section class="section">
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how">
     <div class="container">
-      <div class="section-label">// the cost of poor deliverability</div>
-      <h2 class="page-title" style="font-size:clamp(36px,5vw,72px);">
-        YOU'RE LEAVING<br>
-        <span class="accent-text">REAL MONEY</span><br>
-        ON THE TABLE
-      </h2>
-      <p style="color:var(--muted);font-size:16px;max-width:500px;margin-bottom:40px;line-height:1.65;">
-        Drag the sliders to see what your email list is actually worth — and what you're losing every month to inbox filters.
-      </p>
-
-      <!-- Sliders -->
-      <div class="card" style="max-width:600px;margin-bottom:28px;">
-        <div class="section-label" style="margin-bottom:20px;">// your sending profile</div>
-        <div style="margin-bottom:22px;">
-          <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
-            <span class="mono" style="font-size:12px;color:var(--muted);letter-spacing:1px;">LIST SIZE</span>
-            <span class="mono" style="font-size:13px;color:var(--accent)" id="listVal">25K contacts</span>
-          </div>
-          <input type="range" min="1000" max="500000" step="1000" value="25000" id="listSize" oninput="updateROI()">
+      <p class="section-label">How It Works</p>
+      <h2 class="section-title">Three Signals That Move You to the Inbox</h2>
+      <p class="section-intro">Mailbox providers decide placement by how real people treat your mail. We generate the exact engagement signals they reward — automatically.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-icon">🌱</div>
+          <h3>Seed List Warm-Up</h3>
+          <p>Our engaged seed list reads, clicks, and replies to your campaigns — teaching Gmail, Outlook &amp; Yahoo that your emails are wanted.</p>
         </div>
-        <div style="margin-bottom:22px;">
-          <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
-            <span class="mono" style="font-size:12px;color:var(--muted);letter-spacing:1px;">SENDS / MONTH</span>
-            <span class="mono" style="font-size:13px;color:var(--accent)" id="sendsVal">4 campaigns</span>
-          </div>
-          <input type="range" min="1" max="30" step="1" value="4" id="sends" oninput="updateROI()">
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-icon">📈</div>
+          <h3>Live Reputation Signals</h3>
+          <p>Positive opens, replies, and "move to inbox" actions stack up daily, rebuilding your sender reputation across every major provider.</p>
         </div>
-        <div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
-            <span class="mono" style="font-size:12px;color:var(--muted);letter-spacing:1px;">AVG ORDER VALUE</span>
-            <span class="mono" style="font-size:13px;color:var(--accent)" id="aovVal">$85</span>
-          </div>
-          <input type="range" min="10" max="1000" step="5" value="85" id="aov" oninput="updateROI()">
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-icon">🛰️</div>
+          <h3>Placement Monitoring</h3>
+          <p>See exactly where you land — inbox, promotions, or spam — with seed-account testing and alerts before a campaign costs you revenue.</p>
         </div>
-      </div>
-
-      <!-- Comparison cards -->
-      <div class="roi-grid">
-        <div class="roi-card roi-poor">
-          <div style="font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--danger);margin-bottom:16px;">// POOR DELIVERABILITY</div>
-          <div style="font-family:var(--display);font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;">OPEN RATE</div>
-          <div class="roi-value" style="color:var(--danger);margin-bottom:20px;">19%</div>
-          <div id="poorStats">
-            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;">
-              <span style="color:var(--muted)">Opens</span><span id="poorOpens">—</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;">
-              <span style="color:var(--muted)">Clicks</span><span id="poorClicks">—</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;">
-              <span style="color:var(--muted)">Orders</span><span id="poorOrders">—</span>
-            </div>
-          </div>
-          <div style="margin-top:16px;">
-            <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px;">EMAIL REV / YEAR</div>
-            <div class="roi-value" style="color:var(--danger)" id="poorRev">$0</div>
-          </div>
-        </div>
-
-        <div class="roi-card roi-great">
-          <div style="font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--accent);margin-bottom:16px;">// GREAT DELIVERABILITY</div>
-          <div style="font-family:var(--display);font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;">OPEN RATE</div>
-          <div class="roi-value" style="color:var(--accent);margin-bottom:20px;">41%+</div>
-          <div>
-            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;">
-              <span style="color:var(--muted)">Opens</span><span style="color:var(--accent)" id="greatOpens">—</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;">
-              <span style="color:var(--muted)">Clicks</span><span style="color:var(--accent)" id="greatClicks">—</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;">
-              <span style="color:var(--muted)">Orders</span><span style="color:var(--accent)" id="greatOrders">—</span>
-            </div>
-          </div>
-          <div style="margin-top:16px;">
-            <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px;">EMAIL REV / YEAR</div>
-            <div class="roi-value" style="color:var(--accent)" id="greatRev">$0</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="roi-lift">
-        <div>
-          <div style="font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--muted);margin-bottom:8px;">REVENUE UNLOCKED BY INBOXSMARTS / YEAR</div>
-          <div style="font-family:var(--mono);font-size:clamp(32px,5vw,56px);font-weight:600;color:var(--accent)" id="liftVal">$0</div>
-        </div>
-        <a href="/signup" class="btn-primary" style="font-size:15px;">Unlock My Revenue →</a>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS SNIPPET -->
-  <section class="section" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <!-- DOMAIN SCANNER -->
+  <section class="section" id="scan" style="background:#000;">
     <div class="container">
-      <div class="section-label">// four pillars</div>
-      <h2 class="page-title" style="font-size:clamp(32px,4vw,64px);margin-bottom:48px;">
-        AMPLIFY YOUR<br><span class="accent-text">SENDER SIGNALS</span>
-      </h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;">
-        ${[
-          ['01','Seed List Warm-Up','Our engaged seed list reads, clicks, and replies to your campaigns — teaching Gmail, Outlook & Yahoo that your emails are wanted.'],
-          ['02','Auth Hardening','SPF, DKIM, and DMARC misconfigurations silently route mail to spam. We audit and fix every gap in days.'],
-          ['03','Reputation Monitoring','Real-time blacklist checks across 80+ RBLs so you catch problems before they become inbox crises.'],
-          ['04','Inbox Placement Testing','Know exactly where your emails land — inbox, promotions, spam — before you hit send.'],
-        ].map(([n,t,d]) => `
-          <div style="border-left:2px solid var(--border);padding-left:20px;transition:border-color 0.2s;" onmouseenter="this.style.borderLeftColor='var(--accent)'" onmouseleave="this.style.borderLeftColor='var(--border)'">
-            <div class="mono" style="font-size:11px;color:var(--accent);margin-bottom:8px;">${n}</div>
-            <div style="font-family:var(--display);font-size:20px;font-weight:700;margin-bottom:10px;">${t}</div>
-            <div style="font-size:14px;color:var(--muted);line-height:1.7;">${d}</div>
-          </div>
-        `).join('')}
+      <p class="section-label">Free Domain Health Check</p>
+      <h2 class="section-title">Score Your Inbox Reputation in 30 Seconds</h2>
+      <p class="section-intro">Enter your domain and we'll check SPF, DKIM, DMARC, blacklists, and MX — then score exactly what ISPs see when your email arrives.</p>
+      <div class="scanner-wrap">
+        <input id="domainInput" class="scanner-input" placeholder="yourdomain.com" type="text" />
+        <button class="btn-primary" id="scanBtn" onclick="runScan()" style="padding:16px 28px;font-size:14px;">Scan Domain →</button>
       </div>
-      <div style="margin-top:48px;">
-        <a href="/how-it-works" class="btn-outline">See How It Works →</a>
+      <div id="scanResults" class="scan-results"></div>
+    </div>
+  </section>
+
+  <!-- ROI CALCULATOR -->
+  <section class="section" id="roi">
+    <div class="container">
+      <p class="section-label">The Cost of Poor Deliverability</p>
+      <h2 class="section-title">You're Leaving Real Money on the Table</h2>
+      <p class="section-intro">Drag the sliders to see what your list is actually worth — and what you lose every month to inbox filters.</p>
+      <div class="roi-wrap">
+        <div class="card" style="margin-bottom:28px;">
+          <div class="section-label" style="text-align:left;margin-bottom:20px;">Your Sending Profile</div>
+          <div style="margin-bottom:22px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+              <span class="mono" style="font-size:12px;color:var(--muted);letter-spacing:1px;">LIST SIZE</span>
+              <span class="mono" style="font-size:13px;color:var(--green-dark)" id="listVal">25K contacts</span>
+            </div>
+            <input type="range" min="1000" max="500000" step="1000" value="25000" id="listSize" oninput="updateROI()">
+          </div>
+          <div style="margin-bottom:22px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+              <span class="mono" style="font-size:12px;color:var(--muted);letter-spacing:1px;">SENDS / MONTH</span>
+              <span class="mono" style="font-size:13px;color:var(--green-dark)" id="sendsVal">4 campaigns</span>
+            </div>
+            <input type="range" min="1" max="30" step="1" value="4" id="sends" oninput="updateROI()">
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+              <span class="mono" style="font-size:12px;color:var(--muted);letter-spacing:1px;">AVG ORDER VALUE</span>
+              <span class="mono" style="font-size:13px;color:var(--green-dark)" id="aovVal">$85</span>
+            </div>
+            <input type="range" min="10" max="1000" step="5" value="85" id="aov" oninput="updateROI()">
+          </div>
+        </div>
+
+        <div class="roi-grid">
+          <div class="roi-card roi-poor">
+            <div style="font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--danger);margin-bottom:16px;">POOR DELIVERABILITY</div>
+            <div style="font-family:var(--display);font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;">OPEN RATE</div>
+            <div class="roi-value" style="color:var(--danger);margin-bottom:20px;">19%</div>
+            <div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;"><span style="color:var(--muted)">Opens</span><span id="poorOpens">—</span></div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;"><span style="color:var(--muted)">Clicks</span><span id="poorClicks">—</span></div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;"><span style="color:var(--muted)">Orders</span><span id="poorOrders">—</span></div>
+            </div>
+            <div style="margin-top:16px;">
+              <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px;">EMAIL REV / YEAR</div>
+              <div class="roi-value" style="color:var(--danger)" id="poorRev">$0</div>
+            </div>
+          </div>
+
+          <div class="roi-card roi-great">
+            <div style="font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--green-dark);margin-bottom:16px;">GREAT DELIVERABILITY</div>
+            <div style="font-family:var(--display);font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;">OPEN RATE</div>
+            <div class="roi-value" style="color:var(--green-dark);margin-bottom:20px;">41%+</div>
+            <div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;"><span style="color:var(--muted)">Opens</span><span style="color:var(--green-dark)" id="greatOpens">—</span></div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;"><span style="color:var(--muted)">Clicks</span><span style="color:var(--green-dark)" id="greatClicks">—</span></div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;"><span style="color:var(--muted)">Orders</span><span style="color:var(--green-dark)" id="greatOrders">—</span></div>
+            </div>
+            <div style="margin-top:16px;">
+              <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px;">EMAIL REV / YEAR</div>
+              <div class="roi-value" style="color:var(--green-dark)" id="greatRev">$0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="roi-lift">
+          <div>
+            <div style="font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--muted);margin-bottom:8px;">REVENUE UNLOCKED BY INBOXSMARTS / YEAR</div>
+            <div style="font-family:var(--mono);font-size:clamp(32px,5vw,56px);font-weight:600;color:var(--green-dark)" id="liftVal">$0</div>
+          </div>
+          <a href="/signup" class="btn-primary" style="font-size:15px;">Unlock My Revenue →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section why" id="why">
+    <div class="container">
+      <div class="why-grid">
+        <div>
+          <p class="section-label">Why It Works</p>
+          <h2>Inboxes Trust <span class="hl">Engagement</span> — Not Promises</h2>
+          <p>Gmail, Outlook, and Yahoo don't read your content. They watch behavior: who opens, who replies, who rescues you from spam. Without those signals, even great email lands in the void.</p>
+          <p class="pullquote">"They need your engagement more than you need their inbox."</p>
+          <p>InboxSmarts manufactures authentic, positive engagement at the moment of send — so the algorithms see a sender people love, and reward you with the primary inbox.</p>
+        </div>
+        <div class="stat-stack">
+          <div class="stat"><div class="num">+38%</div><div class="lbl">Average lift in inbox placement within 30 days</div></div>
+          <div class="stat"><div class="num">2.4×</div><div class="lbl">More opens once you clear the spam folder</div></div>
+          <div class="stat"><div class="num">3,142+</div><div class="lbl">Senders amplifying their signals with InboxSmarts</div></div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FINAL CTA -->
-  <section class="section" style="text-align:center;">
+  <section class="section final-cta" id="pricing">
     <div class="container">
-      <div class="section-label" style="text-align:center;">// stop guessing</div>
-      <h2 class="hero-title" style="font-size:clamp(48px,7vw,88px);margin-bottom:24px;">
-        YOUR INBOX<br>SCORE IS<br><span class="accent-text">WAITING</span>
-      </h2>
-      <p style="color:var(--muted);font-size:18px;margin-bottom:40px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6;">
-        Run your free domain scan and see exactly what ISPs see when your emails arrive. 30 seconds.
-      </p>
-      <a href="/signup" class="btn-primary" style="font-size:17px;padding:20px 48px;">
-        Scan My Domain Free →
-      </a>
+      <p class="section-label">Start Free</p>
+      <h2>See Where Your Emails Actually Land</h2>
+      <p>Run a free inbox reputation scan and watch your placement climb. No contracts, no risk — just more of your email reaching real people.</p>
+      <a href="/signup" class="btn-primary">I want more inbox placement</a>
     </div>
   </section>
 
+  <!-- FOOTER -->
+  <footer>
+    <a href="/" class="logo">inbox<span>smarts</span>.com</a>
+    <div class="footer-links">
+      <a href="/how-it-works">How It Works</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </div>
+    <span class="footer-fine">© 2025 InboxSmarts · A SJW Ventures Product</span>
+  </footer>
+
   <script>
-    // ── SCANNER ──
     const CHECKS = [
-      { id:'spf',       label:'SPF Record',     desc:'Sender Policy Framework' },
+      { id:'spf',       label:'SPF Record',      desc:'Sender Policy Framework' },
       { id:'dkim',      label:'DKIM Signature',  desc:'DomainKeys Identified Mail' },
       { id:'dmarc',     label:'DMARC Policy',    desc:'Domain-based Message Auth' },
-      { id:'blacklist', label:'Blacklist Status', desc:'Checked across 80+ RBLs' },
+      { id:'blacklist', label:'Blacklist Status',desc:'Checked across 80+ RBLs' },
       { id:'mx',        label:'MX Records',      desc:'Mail Exchange config' },
     ];
 
@@ -292,14 +388,14 @@ export const homePage = (env) => layout({
         row.innerHTML = \`<div class="spinner"></div>
           <div style="flex:1">
             <div style="font-family:var(--mono);font-size:13px;font-weight:600">\${check.label}</div>
-            <div style="font-family:var(--mono);font-size:11px;color:var(--accent2)">checking...<span style="animation:blink 1s infinite">_</span></div>
+            <div style="font-family:var(--mono);font-size:11px;color:var(--green-dark)">checking...<span style="animation:blink 1s infinite">_</span></div>
           </div>
           <span style="font-family:var(--mono);font-size:10px;color:var(--muted)">\${check.desc}</span>\`;
         el.appendChild(row);
         await new Promise(r => setTimeout(r, 700 + Math.random()*600));
 
         const [status, detail] = fakeResult(check, domain);
-        const colors = { pass:'var(--accent)', warn:'var(--warn)', fail:'var(--danger)' };
+        const colors = { pass:'var(--green-dark)', warn:'var(--yellow-dark)', fail:'var(--danger)' };
         const dotClass = { pass:'dot-pass', warn:'dot-warn', fail:'dot-fail' };
         score += status === 'pass' ? 20 : status === 'warn' ? 10 : 0;
         row.innerHTML = \`
@@ -314,8 +410,7 @@ export const homePage = (env) => layout({
           <span style="font-family:var(--mono);font-size:10px;color:var(--muted)">\${check.desc}</span>\`;
       }
 
-      // Score card
-      const color = score >= 80 ? 'var(--accent)' : score >= 50 ? 'var(--warn)' : 'var(--danger)';
+      const color = score >= 80 ? 'var(--green-dark)' : score >= 50 ? 'var(--yellow-dark)' : 'var(--danger)';
       const msg = score >= 80
         ? 'Strong foundation. Now amplify your engagement signals to push past inbox filters.'
         : score >= 50
@@ -339,7 +434,6 @@ export const homePage = (env) => layout({
       btn.disabled = false; btn.textContent = 'Scan Again →';
     }
 
-    // ── ROI CALC ──
     function fmtN(n) {
       if (n >= 1e6) return (n/1e6).toFixed(1)+'M';
       if (n >= 1e3) return Math.round(n/1e3)+'K';
@@ -352,9 +446,9 @@ export const homePage = (env) => layout({
     }
 
     function updateROI() {
-      const list   = +document.getElementById('listSize').value;
-      const sends  = +document.getElementById('sends').value;
-      const aov    = +document.getElementById('aov').value;
+      const list  = +document.getElementById('listSize').value;
+      const sends = +document.getElementById('sends').value;
+      const aov   = +document.getElementById('aov').value;
 
       document.getElementById('listVal').textContent  = fmtN(list) + ' contacts';
       document.getElementById('sendsVal').textContent = sends + ' campaigns';
@@ -363,29 +457,23 @@ export const homePage = (env) => layout({
       const delivered = list * sends * 12 * 0.92;
       const poor  = { open:.19, ctr:.021, conv:.008 };
       const great = { open:.41, ctr:.055, conv:.021 };
-
-      const calc = m => ({
-        opens:   delivered * m.open,
-        clicks:  delivered * m.ctr,
-        orders:  delivered * m.conv,
-        revenue: delivered * m.conv * aov,
-      });
-
+      const calc = m => ({ opens:delivered*m.open, clicks:delivered*m.ctr, orders:delivered*m.conv, revenue:delivered*m.conv*aov });
       const p = calc(poor), g = calc(great);
 
       document.getElementById('poorOpens').textContent  = fmtN(p.opens);
       document.getElementById('poorClicks').textContent = fmtN(p.clicks);
       document.getElementById('poorOrders').textContent = fmtN(p.orders);
       document.getElementById('poorRev').textContent    = fmtD(p.revenue);
-
       document.getElementById('greatOpens').textContent  = fmtN(g.opens);
       document.getElementById('greatClicks').textContent = fmtN(g.clicks);
       document.getElementById('greatOrders').textContent = fmtN(g.orders);
       document.getElementById('greatRev').textContent    = fmtD(g.revenue);
-
       document.getElementById('liftVal').textContent = fmtD(g.revenue - p.revenue);
     }
 
     updateROI();
   </script>
-`});
+
+</body>
+</html>
+`;

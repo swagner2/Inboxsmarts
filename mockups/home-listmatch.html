@@ -1,4 +1,4 @@
-export const homePage = (env) => `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -153,9 +153,9 @@ export const homePage = (env) => `<!DOCTYPE html>
     <div class="nav-links">
       <a href="#how">How It Works</a>
       <a href="#why">Why It Works</a>
-      <a href="/pricing">Pricing</a>
+      <a href="#pricing">Pricing</a>
     </div>
-    <a href="/signup" class="nav-cta">Get Started</a>
+    <a href="#top" class="nav-cta">Get Started</a>
   </nav>
 
   <!-- HERO -->
@@ -165,7 +165,7 @@ export const homePage = (env) => `<!DOCTYPE html>
       <h1>Get Your Emails Into the <span class="hl">Inbox</span> — Not the Spam Folder</h1>
       <p class="hero-sub">Half your revenue is lost to spam folders you never see. InboxSmarts amplifies your sending signals so Gmail, Outlook &amp; Yahoo route you straight to the primary inbox — every send.</p>
       <div class="hero-cta-row">
-        <a href="/signup" class="btn-primary">I want better deliverability</a>
+        <a href="#pricing" class="btn-primary">I want better deliverability</a>
         <div class="social-proof">
           <div class="avatars"><span>SK</span><span>MR</span><span>JD</span><span>AL</span></div>
           <span>Join 3,142+ senders reaching the inbox</span>
@@ -303,7 +303,7 @@ export const homePage = (env) => `<!DOCTYPE html>
             <div style="font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--muted);margin-bottom:8px;">REVENUE UNLOCKED BY INBOXSMARTS / YEAR</div>
             <div style="font-family:var(--mono);font-size:clamp(32px,5vw,56px);font-weight:600;color:var(--green-dark)" id="liftVal">$0</div>
           </div>
-          <a href="/signup" class="btn-primary" style="font-size:15px;">Unlock My Revenue →</a>
+          <a href="#pricing" class="btn-primary" style="font-size:15px;">Unlock My Revenue →</a>
         </div>
       </div>
     </div>
@@ -335,7 +335,7 @@ export const homePage = (env) => `<!DOCTYPE html>
       <p class="section-label">Start Free</p>
       <h2>See Where Your Emails Actually Land</h2>
       <p>Run a free inbox reputation scan and watch your placement climb. No contracts, no risk — just more of your email reaching real people.</p>
-      <a href="/signup" class="btn-primary">I want more inbox placement</a>
+      <a href="#top" class="btn-primary">I want more inbox placement</a>
     </div>
   </section>
 
@@ -343,9 +343,9 @@ export const homePage = (env) => `<!DOCTYPE html>
   <footer>
     <a href="/" class="logo">inbox<span>smarts</span>.com</a>
     <div class="footer-links">
-      <a href="/how-it-works">How It Works</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/contact">Contact</a>
+      <a href="#how">How It Works</a>
+      <a href="#why">Why It Works</a>
+      <a href="#pricing">Pricing</a>
       <a href="/privacy">Privacy Policy</a>
       <a href="/terms">Terms of Service</a>
     </div>
@@ -385,12 +385,12 @@ export const homePage = (env) => `<!DOCTYPE html>
       for (const check of CHECKS) {
         const row = document.createElement('div');
         row.className = 'result-row';
-        row.innerHTML = \`<div class="spinner"></div>
+        row.innerHTML = `<div class="spinner"></div>
           <div style="flex:1">
-            <div style="font-family:var(--mono);font-size:13px;font-weight:600">\${check.label}</div>
+            <div style="font-family:var(--mono);font-size:13px;font-weight:600">${check.label}</div>
             <div style="font-family:var(--mono);font-size:11px;color:var(--green-dark)">checking...<span style="animation:blink 1s infinite">_</span></div>
           </div>
-          <span style="font-family:var(--mono);font-size:10px;color:var(--muted)">\${check.desc}</span>\`;
+          <span style="font-family:var(--mono);font-size:10px;color:var(--muted)">${check.desc}</span>`;
         el.appendChild(row);
         await new Promise(r => setTimeout(r, 700 + Math.random()*600));
 
@@ -398,16 +398,16 @@ export const homePage = (env) => `<!DOCTYPE html>
         const colors = { pass:'var(--green-dark)', warn:'var(--yellow-dark)', fail:'var(--danger)' };
         const dotClass = { pass:'dot-pass', warn:'dot-warn', fail:'dot-fail' };
         score += status === 'pass' ? 20 : status === 'warn' ? 10 : 0;
-        row.innerHTML = \`
-          <div class="status-dot \${dotClass[status]}"></div>
+        row.innerHTML = `
+          <div class="status-dot ${dotClass[status]}"></div>
           <div style="flex:1">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:3px;">
-              <span style="font-family:var(--mono);font-size:13px;font-weight:600">\${check.label}</span>
-              <span style="font-family:var(--mono);font-size:10px;color:\${colors[status]};letter-spacing:1px">\${status.toUpperCase()}</span>
+              <span style="font-family:var(--mono);font-size:13px;font-weight:600">${check.label}</span>
+              <span style="font-family:var(--mono);font-size:10px;color:${colors[status]};letter-spacing:1px">${status.toUpperCase()}</span>
             </div>
-            <span style="font-family:var(--mono);font-size:11px;color:var(--muted)">\${detail}</span>
+            <span style="font-family:var(--mono);font-size:11px;color:var(--muted)">${detail}</span>
           </div>
-          <span style="font-family:var(--mono);font-size:10px;color:var(--muted)">\${check.desc}</span>\`;
+          <span style="font-family:var(--mono);font-size:10px;color:var(--muted)">${check.desc}</span>`;
       }
 
       const color = score >= 80 ? 'var(--green-dark)' : score >= 50 ? 'var(--yellow-dark)' : 'var(--danger)';
@@ -418,18 +418,18 @@ export const homePage = (env) => `<!DOCTYPE html>
         : 'Multiple authentication failures detected. ISPs are flagging your domain right now.';
       const sc = document.createElement('div');
       sc.className = 'score-wrap';
-      sc.innerHTML = \`
+      sc.innerHTML = `
         <div style="text-align:center;flex-shrink:0">
-          <div style="font-family:var(--mono);font-size:42px;font-weight:600;color:\${color};line-height:1">\${score}</div>
+          <div style="font-family:var(--mono);font-size:42px;font-weight:600;color:${color};line-height:1">${score}</div>
           <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">/100 SCORE</div>
         </div>
         <div>
           <div style="font-family:var(--display);font-size:22px;font-weight:700;margin-bottom:8px">
-            \${score >= 80 ? 'Strong foundation' : score >= 50 ? 'Room to improve' : 'Critical issues found'}
+            ${score >= 80 ? 'Strong foundation' : score >= 50 ? 'Room to improve' : 'Critical issues found'}
           </div>
-          <div style="font-size:14px;color:var(--muted);max-width:380px;line-height:1.6">\${msg}</div>
-          <a href="/signup" class="btn-primary" style="margin-top:16px;font-size:13px;padding:12px 22px;">Get Full Remediation Report →</a>
-        </div>\`;
+          <div style="font-size:14px;color:var(--muted);max-width:380px;line-height:1.6">${msg}</div>
+          <a href="#pricing" class="btn-primary" style="margin-top:16px;font-size:13px;padding:12px 22px;">Get Full Remediation Report →</a>
+        </div>`;
       el.appendChild(sc);
       btn.disabled = false; btn.textContent = 'Scan Again →';
     }
@@ -476,4 +476,3 @@ export const homePage = (env) => `<!DOCTYPE html>
 
 </body>
 </html>
-`;
