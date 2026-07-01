@@ -1,5 +1,8 @@
 import { layout } from '../layout.js';
 
+// Google Calendar "Appointment schedule" embed URL
+const CAL_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3yTi9fajh-J5Hxe7iXrQ3G36lb9z5eaxNnV2wnxB6KsAioFisGEEivDt_9hEMo3nld_e5mukXA?gv=true';
+
 export const demoPage = (env) => layout({
   title: 'Book a Demo',
   path: '/demo',
@@ -61,6 +64,14 @@ export const demoPage = (env) => layout({
     .logo-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-top:44px; }
     .logo-pill { border:1px solid var(--border);padding:18px 12px;font-family:var(--mono);font-size:13px;color:var(--muted);letter-spacing:1px; }
 
+    /* BOOKING / CALENDAR */
+    .cal-embed { max-width:840px;margin:0 auto;background:var(--bg);border:1px solid var(--border);overflow:hidden; }
+    .cal-embed iframe { display:block;width:100%;border:0; }
+    .cal-placeholder { max-width:840px;margin:0 auto;border:2px dashed var(--border);background:var(--bg);min-height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:40px; }
+    .cal-placeholder .ico { font-size:44px; }
+    .cal-placeholder .big { font-family:var(--display);font-size:26px;font-weight:800;text-transform:uppercase; }
+    .cal-placeholder .small { font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:1px;max-width:44ch;line-height:1.7; }
+
     /* FINAL */
     .demo-final { text-align:center; }
     .demo-final h2 { font-family:var(--display);font-size:clamp(36px,5vw,68px);font-weight:900;text-transform:uppercase;line-height:0.98;max-width:20ch;margin:0 auto 22px; }
@@ -78,7 +89,7 @@ export const demoPage = (env) => layout({
       <h1>AI alone won't get you<br>into the <span class="hl">inbox</span></h1>
       <p class="sub">InboxSmarts is the execution engine for deliverability. AI finds the gaps, InboxSmarts fixes what's broken, and you drive more revenue from the emails you already send.</p>
       <div class="cta-row">
-        <a href="/contact" class="btn-primary">Book a Demo</a>
+        <a href="#book" class="btn-primary">Book a Demo</a>
         <a href="/#scan" class="btn-outline">Run a Free Scan</a>
       </div>
     </div>
@@ -107,6 +118,22 @@ export const demoPage = (env) => layout({
     </div>
   </div>
 
+  <!-- BOOKING -->
+  <section class="section" id="book" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="container">
+      <p class="demo-label">Book Your Demo</p>
+      <h2 class="demo-title">Grab a 20-Minute Slot</h2>
+      <p class="demo-intro">Pick a time that works — we'll scan your domain live and map your fastest path to the inbox.</p>
+      ${CAL_URL
+        ? `<div class="cal-embed"><iframe src="${CAL_URL}" width="100%" height="640" frameborder="0"></iframe></div>`
+        : `<div class="cal-placeholder">
+             <div class="ico">📅</div>
+             <div class="big">Your Google Calendar Booking Widget</div>
+             <div class="small">Add your Google Calendar appointment-schedule embed link and it will render here so visitors can book a demo without leaving the page.</div>
+           </div>`}
+    </div>
+  </section>
+
   <!-- RESULTS -->
   <section class="section">
     <div class="container">
@@ -131,7 +158,7 @@ export const demoPage = (env) => layout({
         </div>
       </div>
       <div style="text-align:center;margin-top:44px;">
-        <a href="/contact" class="btn-primary">Book a Demo</a>
+        <a href="#book" class="btn-primary">Book a Demo</a>
       </div>
     </div>
   </section>
@@ -217,7 +244,7 @@ export const demoPage = (env) => layout({
       <h2>See Where Your Emails Actually Land</h2>
       <p>Book a 20-minute demo and we'll scan your domain live, show your inbox score, and map the fastest path to the primary inbox.</p>
       <div class="cta-row">
-        <a href="/contact" class="btn-primary">Book a Demo</a>
+        <a href="#book" class="btn-primary">Book a Demo</a>
         <a href="/signup" class="btn-outline">Get Started</a>
       </div>
     </div>
