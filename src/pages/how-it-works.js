@@ -150,7 +150,7 @@ export const howItWorksPage = (env) => layout({
                 <span>${d}</span>
               </div>`).join('')}
             </div>
-            <div style="background:rgba(0,229,160,0.05);border-left:2px solid var(--accent);padding:14px 20px;font-size:14px;color:var(--muted);line-height:1.6;max-width:600px;">
+            <div style="background:rgba(32,204,120,0.05);border-left:2px solid var(--accent);padding:14px 20px;font-size:14px;color:var(--muted);line-height:1.6;max-width:600px;">
               ${step.callout}
             </div>
           </div>

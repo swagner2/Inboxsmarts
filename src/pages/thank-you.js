@@ -17,7 +17,7 @@ export const thankYouPage = (env) => layout({
     .check-circle {
       width: 96px; height: 96px;
       border-radius: 50%;
-      background: rgba(0,229,160,0.08);
+      background: rgba(32,204,120,0.08);
       border: 2px solid var(--accent);
       display: flex; align-items: center; justify-content: center;
       margin: 0 auto 32px;

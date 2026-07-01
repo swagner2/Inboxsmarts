@@ -35,11 +35,11 @@ const notFound = () => html(`<!DOCTYPE html>
 <html><head><title>404 — InboxSmarts</title>
 <meta charset="UTF-8"/>
 <style>
-  body{background:#060810;color:#e8edf5;font-family:'IBM Plex Mono',monospace;
+  body{background:#ffffff;color:#1e1e1e;font-family:'IBM Plex Mono',monospace;
   display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;}
-  h1{font-size:80px;color:#00e5a0;line-height:1;}
-  p{color:#5a7080;margin:16px 0 32px;}
-  a{color:#00e5a0;}
+  h1{font-size:80px;color:#20cc78;line-height:1;}
+  p{color:#919191;margin:16px 0 32px;}
+  a{color:#04bf62;}
 </style></head>
 <body>
   <div>

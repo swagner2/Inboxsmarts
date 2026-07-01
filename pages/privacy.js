@@ -179,7 +179,7 @@ export const privacyPage = (env) => layout({
           ${COMPANY}, ${STATE}, USA
         </p>
 
-        <p style="margin-top:48px;padding:16px;background:rgba(255,184,48,0.06);border-left:2px solid var(--warn);font-size:13px;color:var(--muted);">
+        <p style="margin-top:48px;padding:16px;background:rgba(248,187,30,0.06);border-left:2px solid var(--warn);font-size:13px;color:var(--muted);">
           <strong style="color:var(--warn);font-family:var(--mono);font-size:11px;letter-spacing:1px;">// TODO — LEGAL REVIEW REQUIRED</strong><br>
           This is a template. Have a qualified attorney review this policy before launch, especially
           if you serve customers in the EU (GDPR), California (CCPA), or other regulated jurisdictions.

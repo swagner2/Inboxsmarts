@@ -108,7 +108,7 @@ export const contactPage = (env) => layout({
               </div>
 
               <div id="contactError" style="display:none;color:var(--danger);font-family:var(--mono);font-size:13px;margin-bottom:16px;"></div>
-              <div id="contactSuccess" style="display:none;color:var(--accent);font-family:var(--mono);font-size:13px;margin-bottom:16px;padding:12px 16px;border:1px solid rgba(0,229,160,0.3);background:rgba(0,229,160,0.05);">
+              <div id="contactSuccess" style="display:none;color:var(--accent);font-family:var(--mono);font-size:13px;margin-bottom:16px;padding:12px 16px;border:1px solid rgba(32,204,120,0.3);background:rgba(32,204,120,0.05);">
                 ✓ Message sent. We'll be in touch within 4 business hours.
               </div>
 

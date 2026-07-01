@@ -2,19 +2,27 @@ export const FONTS = `https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wgh
 
 export const CSS = `
   :root {
-    --bg:       #0a2a6e;
-    --surface:  #0d3280;
-    --surface2: #103a92;
-    --border:   #2a5abf;
-    --accent:   #e8f4ff;
-    --accent2:  #7ec8f5;
-    --danger:   #ff6b8a;
-    --warn:     #ffd166;
-    --text:     #ddeeff;
-    --muted:    #7aaad4;
-    --mono:     'IBM Plex Mono', monospace;
-    --display:  'Barlow Condensed', sans-serif;
-    --body:     'Barlow', sans-serif;
+    --bg:        #ffffff;
+    --surface:   #f4f4f4;
+    --surface2:  #efeeee;
+    --border:    #e6e6e6;
+    --accent:    #04bf62;
+    --accent2:   #20cc78;
+    --green:     #20cc78;
+    --green-dark:#04bf62;
+    --green-tint:rgba(32,204,120,0.1);
+    --yellow:    #f8bb1e;
+    --yellow-dark:#e1ac00;
+    --dark:      #161616;
+    --danger:    #e24b4a;
+    --warn:      #e1ac00;
+    --text:      #1e1e1e;
+    --ink:       #1e1e1e;
+    --ink-soft:  #383838;
+    --muted:     #919191;
+    --mono:      'IBM Plex Mono', monospace;
+    --display:   'Barlow Condensed', sans-serif;
+    --body:      'Barlow', sans-serif;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,14 +39,12 @@ export const CSS = `
 
   .grid-bg {
     background-image:
-      linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
-      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+      linear-gradient(rgba(0,0,0,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.035) 1px, transparent 1px);
+    background-size: 80px 80px;
   }
 
-  a { color: var(--accent); text-decoration: none; }
+  a { color: var(--green-dark); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
   /* ── NAV ── */
@@ -46,13 +52,13 @@ export const CSS = `
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 16px 40px;
     display: flex; align-items: center; justify-content: space-between;
-    background: rgba(6,8,16,0.88);
+    background: rgba(255,255,255,0.88);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
 
   .logo { font-family: var(--mono); font-size: 15px; font-weight: 600; letter-spacing: 1px; text-decoration: none; color: var(--text); }
-  .logo span { color: var(--accent); }
+  .logo span { color: var(--green-dark); }
 
   .nav-links { display: flex; gap: 32px; align-items: center; }
   .nav-links a {
@@ -60,16 +66,16 @@ export const CSS = `
     text-transform: uppercase; color: var(--muted); text-decoration: none;
     transition: color 0.2s;
   }
-  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
 
   .nav-cta {
-    background: transparent;
-    border: 1px solid var(--accent); color: var(--accent);
-    font-family: var(--mono); font-size: 12px; letter-spacing: 2px;
+    background: var(--yellow);
+    border: 1px solid var(--yellow); color: #1e1e1e;
+    font-family: var(--mono); font-weight: 600; font-size: 12px; letter-spacing: 2px;
     text-transform: uppercase; padding: 10px 20px; cursor: pointer;
     transition: all 0.2s; text-decoration: none; display: inline-block;
   }
-  .nav-cta:hover { background: var(--accent); color: #000; text-decoration: none; }
+  .nav-cta:hover { background: var(--yellow-dark); border-color: var(--yellow-dark); color: #1e1e1e; text-decoration: none; }
 
   /* ── FOOTER ── */
   footer {
@@ -81,27 +87,27 @@ export const CSS = `
 
   .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
   .footer-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); }
-  .footer-links a:hover { color: var(--accent); }
+  .footer-links a:hover { color: var(--text); }
 
   /* ── TYPOGRAPHY ── */
   .section-label {
     font-family: var(--mono); font-size: 11px;
     letter-spacing: 3px; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 12px;
+    color: var(--green-dark); margin-bottom: 12px;
   }
 
   .page-title {
     font-family: var(--display);
     font-size: clamp(48px, 7vw, 96px);
     font-weight: 900; text-transform: uppercase;
-    line-height: 0.92; margin-bottom: 24px;
+    line-height: 0.92; margin-bottom: 24px; color: var(--text);
   }
 
-  .accent-text { color: var(--accent); }
+  .accent-text { color: var(--green); }
 
   /* ── BUTTONS ── */
   .btn-primary {
-    background: var(--accent); color: #000;
+    background: var(--yellow); color: #1e1e1e;
     border: none; font-family: var(--display);
     font-weight: 800; font-size: 15px;
     letter-spacing: 2px; text-transform: uppercase;
@@ -109,16 +115,16 @@ export const CSS = `
     transition: all 0.2s; text-decoration: none;
     display: inline-block;
   }
-  .btn-primary:hover { background: #fff; transform: translateY(-1px); text-decoration: none; }
+  .btn-primary:hover { background: var(--yellow-dark); transform: translateY(-1px); text-decoration: none; }
 
   .btn-outline {
-    background: transparent; color: var(--accent);
-    border: 1px solid var(--accent); font-family: var(--display);
+    background: transparent; color: var(--green-dark);
+    border: 1px solid var(--green); font-family: var(--display);
     font-weight: 700; font-size: 14px; letter-spacing: 2px;
     text-transform: uppercase; padding: 14px 28px; cursor: pointer;
     transition: all 0.2s; text-decoration: none; display: inline-block;
   }
-  .btn-outline:hover { background: var(--accent); color: #000; text-decoration: none; }
+  .btn-outline:hover { background: var(--green); color: #fff; text-decoration: none; }
 
   /* ── CARDS ── */
   .card {
@@ -137,21 +143,30 @@ export const CSS = `
     color: var(--text); font-family: var(--mono); font-size: 14px;
     padding: 14px 16px; outline: none; transition: border-color 0.2s;
   }
-  .form-input:focus { border-color: var(--accent); }
+  .form-input:focus { border-color: var(--green); }
   .form-select {
     width: 100%; background: var(--surface2); border: 1px solid var(--border);
     color: var(--text); font-family: var(--mono); font-size: 14px;
     padding: 14px 16px; outline: none; cursor: pointer;
     -webkit-appearance: none; transition: border-color 0.2s;
   }
-  .form-select:focus { border-color: var(--accent); }
+  .form-select:focus { border-color: var(--green); }
   .form-textarea {
     width: 100%; background: var(--surface2); border: 1px solid var(--border);
     color: var(--text); font-family: var(--mono); font-size: 14px;
     padding: 14px 16px; outline: none; resize: vertical; min-height: 120px;
     transition: border-color 0.2s;
   }
-  .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea:focus { border-color: var(--green); }
+
+  input[type=range] {
+    -webkit-appearance: none; width: 100%; height: 4px;
+    background: var(--border); outline: none; border-radius: 2px;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--green); cursor: pointer;
+  }
 
   /* ── UTILITIES ── */
   .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }

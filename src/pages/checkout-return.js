@@ -30,7 +30,7 @@ export const checkoutReturnPage = (env) => layout({
     }
     .provider-option:has(input:checked) {
       border-color: var(--accent);
-      background: rgba(0,229,160,0.06);
+      background: rgba(32,204,120,0.06);
     }
     .provider-option input { accent-color: var(--accent); }
     .setup-note {
@@ -117,7 +117,7 @@ export const checkoutReturnPage = (env) => layout({
             </div>
 
             <div id="intakeError" style="display:none;color:var(--danger);font-family:var(--mono);font-size:13px;margin-bottom:16px;"></div>
-            <div id="intakeSuccess" style="display:none;color:var(--accent);font-family:var(--mono);font-size:13px;margin-bottom:16px;padding:12px 16px;border:1px solid rgba(0,229,160,0.3);background:rgba(0,229,160,0.05);">
+            <div id="intakeSuccess" style="display:none;color:var(--accent);font-family:var(--mono);font-size:13px;margin-bottom:16px;padding:12px 16px;border:1px solid rgba(32,204,120,0.3);background:rgba(32,204,120,0.05);">
               Details received. We'll review this and start your setup.
             </div>
 
