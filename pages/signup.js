@@ -76,7 +76,7 @@ export const signupPage = (env) => layout({
               Login to your InboxSmarts dashboard to view your reports, placement tests, and warmup progress.
             </p>
             <!-- TODO: Wire to actual customer dashboard / portal URL -->
-            <a href="#" class="btn-outline" style="font-size:13px;padding:10px 20px;">Customer Login →</a>
+            <a href="https://launchpad.37signals.com/" target="_blank" rel="noopener" class="btn-outline" style="font-size:13px;padding:10px 20px;">Customer Login →</a>
           </div>
         </div>
 
