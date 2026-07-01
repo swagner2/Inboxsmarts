@@ -4,6 +4,7 @@ import { signupPage }     from './pages/signup.js';
 import { thankYouPage }   from './pages/thank-you.js';
 import { checkoutReturnPage } from './pages/checkout-return.js';
 import { howItWorksPage } from './pages/how-it-works.js';
+import { demoPage }       from './pages/demo.js';
 import { contactPage }    from './pages/contact.js';
 import { privacyPage }    from './pages/privacy.js';
 import { termsPage }      from './pages/terms.js';
@@ -16,6 +17,7 @@ const ROUTES = {
   '/thank-you':     thankYouPage,
   '/checkout-return': checkoutReturnPage,
   '/how-it-works':  howItWorksPage,
+  '/demo':          demoPage,
   '/contact':       contactPage,
   '/privacy':       privacyPage,
   '/terms':         termsPage,
